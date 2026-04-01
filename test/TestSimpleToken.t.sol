@@ -27,4 +27,8 @@ contract TestSimpleToken is Test {
     function testInitialBalanceMatchesJohnsBalance() public view {
         assertEq(simpleToken.balanceOf(john), VALUE);
     }
+
+    function testAlicesBalanceStartsAsZero() public view {
+        assertEq(simpleToken.balanceOf(alice), 0);
+    }
 }
