@@ -17,7 +17,14 @@ contract TestSimpleToken is Test {
 
     /* Set up function */
     function setUp() public {
+        deployer = new DeploySimpleToken();
         simpleToken = deployer.run();
+        vm.prank(msg.sender);
         simpleToken.transfer(john, VALUE);
+    }
+
+    /* Testing functions */
+    function testInitialBalanceMatchesJohnsBalance() public view {
+        assertEq(simpleToken.balanceOf(john), VALUE);
     }
 }
