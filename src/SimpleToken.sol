@@ -12,4 +12,13 @@ contract SimpleToken is ERC20 {
     constructor(uint256 initialSupply) ERC20(NAME, SYMBOL) {
         _mint(msg.sender, initialSupply);
     }
+
+    /* Getter functions */
+    function getTokenName() external pure returns (string memory) {
+        return NAME;
+    }
+
+    function getTokenSymbol() external pure returns (string memory) {
+        return SYMBOL;
+    }
 }
