@@ -11,6 +11,8 @@ contract TestSimpleToken is Test {
     DeploySimpleToken private deployer;
 
     /* State variables */
+    string private constant NAME = "SimpleToken";
+    string private constant SYMBOL = "ST";
     address john = makeAddr("john");
     address alice = makeAddr("alice");
     uint256 private constant VALUE = 5000;
@@ -24,6 +26,14 @@ contract TestSimpleToken is Test {
     }
 
     /* Testing functions */
+    function testTokenNameIsSetCorrectly() public view {
+        assertEq(simpleToken.getTokenName(), NAME);
+    }
+
+    function testTokenSymbolIsSetCorrectly() public view {
+        assertEq(simpleToken.getTokenSymbol(), SYMBOL);
+    }
+
     function testInitialBalanceMatchesJohnsBalance() public view {
         assertEq(simpleToken.balanceOf(john), VALUE);
     }
