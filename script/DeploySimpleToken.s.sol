@@ -6,7 +6,7 @@ import {SimpleToken} from "src/SimpleToken.sol";
 
 contract DeploySimpleToken is Script {
     /* State variables */
-    uint256 private constant INITIAL_SUPPLY = 5000;
+    uint256 private constant INITIAL_SUPPLY = 500 ether;
 
     /* Deploy function */
     function run() public returns (SimpleToken) {

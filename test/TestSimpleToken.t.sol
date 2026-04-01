@@ -15,7 +15,7 @@ contract TestSimpleToken is Test {
     string private constant SYMBOL = "ST";
     address john = makeAddr("john");
     address alice = makeAddr("alice");
-    uint256 private constant VALUE = 5000;
+    uint256 private constant VALUE = 500 ether;
     uint256 private constant INITIAL_ALLOWANCE = 4000;
     uint256 private constant TRANSFER_VALUE = 2500;
 
