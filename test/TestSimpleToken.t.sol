@@ -16,6 +16,7 @@ contract TestSimpleToken is Test {
     address john = makeAddr("john");
     address alice = makeAddr("alice");
     uint256 private constant VALUE = 5000;
+    uint256 private constant TRANSFER_VALUE = 2500;
 
     /* Set up function */
     function setUp() public {
@@ -40,5 +41,15 @@ contract TestSimpleToken is Test {
 
     function testAlicesBalanceStartsAsZero() public view {
         assertEq(simpleToken.balanceOf(alice), 0);
+    }
+
+    function testTransferBetweenTwoWorksCorrectly() public {
+        // Arrange
+        vm.prank(john);
+        simpleToken.transfer(alice, TRANSFER_VALUE);
+
+        // Act / Assert
+        assertEq(simpleToken.balanceOf(john), (VALUE - TRANSFER_VALUE));
+        assertEq(simpleToken.balanceOf(alice), TRANSFER_VALUE);
     }
 }
