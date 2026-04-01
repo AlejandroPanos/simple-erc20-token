@@ -16,6 +16,7 @@ contract TestSimpleToken is Test {
     address john = makeAddr("john");
     address alice = makeAddr("alice");
     uint256 private constant VALUE = 5000;
+    uint256 private constant INITIAL_ALLOWANCE = 4000;
     uint256 private constant TRANSFER_VALUE = 2500;
 
     /* Set up function */
@@ -49,6 +50,20 @@ contract TestSimpleToken is Test {
         simpleToken.transfer(alice, TRANSFER_VALUE);
 
         // Act / Assert
+        assertEq(simpleToken.balanceOf(john), (VALUE - TRANSFER_VALUE));
+        assertEq(simpleToken.balanceOf(alice), TRANSFER_VALUE);
+    }
+
+    function testAllowancesWorkBetweenTwoSenders() public {
+        // Arrange
+        vm.prank(john);
+        simpleToken.approve(alice, INITIAL_ALLOWANCE);
+
+        // Act
+        vm.prank(alice);
+        simpleToken.transferFrom(john, alice, TRANSFER_VALUE);
+
+        // Assert
         assertEq(simpleToken.balanceOf(john), (VALUE - TRANSFER_VALUE));
         assertEq(simpleToken.balanceOf(alice), TRANSFER_VALUE);
     }
